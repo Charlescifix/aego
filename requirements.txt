@@ -1,0 +1,13 @@
+fastapi
+uvicorn
+python-dotenv
+sqlalchemy
+psycopg2-binary
+pydantic
+python-telegram-bot==20.7
+streamlit
+streamlit-authenticator
+httpx
+pytest
+loguru
+black

@@ -1,0 +1,49 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+*.log
+
+# Virtualenv
+venv/
+env/
+
+# IDEs
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# dotenv
+.env
+
+# Streamlit
+.streamlit/
+
+# Database
+*.db
+*.sqlite3
+
+# Byte-compiled
+*.pyo
+*.pyd
+
+# Cache
+*.cache/
+.cache/
+
+# Test output
+htmlcov/
+.tox/
+coverage.xml
+*.cover
+*.py,cover
+
+# Notebooks
+.ipynb_checkpoints/
+
+# Misc
+*.bak
+*.swp
