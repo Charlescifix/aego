@@ -7,8 +7,9 @@ pydantic
 python-telegram-bot==20.7
 streamlit
 streamlit-authenticator
-httpx
+httpx>=0.25.0
 pytest
 loguru
 black
 solana
+httpx-socks
