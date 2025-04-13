@@ -4,12 +4,12 @@ python-dotenv
 sqlalchemy
 psycopg2-binary
 pydantic
-python-telegram-bot==20.7
 streamlit
 streamlit-authenticator
-httpx>=0.25.0
 pytest
 loguru
 black
-solana
 httpx-socks
+python-telegram-bot==20.5
+solana==0.25.0
+httpx==0.23.0
