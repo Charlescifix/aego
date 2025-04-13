@@ -11,3 +11,4 @@ httpx
 pytest
 loguru
 black
+solana
