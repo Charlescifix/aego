@@ -3,6 +3,8 @@ from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 from app.config import API_KEY, logger
 from app.services.wallet_lookup import get_wallet_by_telegram_id
+import httpx
+
 
 
 from sqlalchemy.orm import Session
@@ -60,20 +62,23 @@ async def status(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 
+FASTAPI_URL = "https://aego.up.railway.app"  # Your deployed API
+
 async def balance(update: Update, context: ContextTypes.DEFAULT_TYPE):
     telegram_id = str(update.effective_user.id)
-    wallet = get_wallet_by_telegram_id(telegram_id)
 
-    if not wallet:
-        await update.message.reply_text("❌ No wallet linked. Use /linkwallet <your_wallet_address>")
-        return
+    async with httpx.AsyncClient() as client:
+        response = await client.get(f"{FASTAPI_URL}/api/balance/{telegram_id}")
+        data = response.json()
 
-    try:
-        sol = await get_sol_balance(wallet)
-        await update.message.reply_text(f"💰 Your balance: {sol:.4f} SOL\n📍Wallet: `{wallet}`", parse_mode="Markdown")
-    except Exception as e:
-        await update.message.reply_text("⚠️ Failed to fetch balance. Try again later.")
-        logger.error(f"Balance check failed for {telegram_id}: {e}")
+        if "error" in data:
+            await update.message.reply_text(f"❌ {data['error']}")
+        else:
+            await update.message.reply_text(
+                f"💰 Your balance: {data['balance']:.4f} SOL\n📍Wallet: `{data['wallet']}`",
+                parse_mode="Markdown"
+            )
+
 
 
 
